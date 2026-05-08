@@ -1,0 +1,73 @@
+{
+  "stages": [
+    {
+      "no": 1,
+      "title": "차주 식별·법인 검증",
+      "agent": "A1",
+      "inputs": ["사업자등록증·인증서", "정관(마스킹)", "주주명부", "원천징수신고서", "법인등기부등본"],
+      "output": "차주 법인 프로파일",
+      "duration_sec": 4
+    },
+    {
+      "no": 2,
+      "title": "재무 분석",
+      "agent": "A2",
+      "inputs": ["3개년 재무제표(감사)", "부속명세서 ★ god-node", "부가세 과세표준증명원", "매입매출 세금계산서 합계표"],
+      "output": "3개년 추세·KPI·이상치",
+      "duration_sec": 5,
+      "parallel_group": "domain"
+    },
+    {
+      "no": 3,
+      "title": "매출채권 검증",
+      "agent": "A3",
+      "inputs": ["매출채권 명세서", "거래처원장", "대손충당금 설정·회수", "계약현황"],
+      "output": "회수 가능성·집중도",
+      "duration_sec": 4,
+      "parallel_group": "domain"
+    },
+    {
+      "no": 4,
+      "title": "타행 여신 통합",
+      "agent": "A4",
+      "inputs": ["10.타행거래확인서 ★", "11.운전자금 상환내역", "신한B 대출거래내역서"],
+      "output": "통합 익스포저·상환 패턴",
+      "duration_sec": 4,
+      "parallel_group": "domain"
+    },
+    {
+      "no": 5,
+      "title": "담보 평가",
+      "agent": "A5",
+      "inputs": ["담보물건 등기부등본", "소유부동산 등기부등본", "감정평가서"],
+      "output": "감정가·담보가·근저당 순위·LTV",
+      "duration_sec": 4,
+      "parallel_group": "domain"
+    },
+    {
+      "no": 6,
+      "title": "★ 동일차주 합산",
+      "agent": "A6",
+      "inputs": ["관계회사 자료 일체", "정관·주주", "부속명세서 단기대여", "Graph DB 자체 조회"],
+      "output": "★ 계열 익스포저 + 한도 위반 플래그",
+      "duration_sec": 6,
+      "killer": true
+    },
+    {
+      "no": 7,
+      "title": "위험 종합 분석",
+      "agent": "Synth",
+      "inputs": ["A2-A6 모든 분석 결과", "가중치 산출"],
+      "output": "정량·정성 위험요인 통합",
+      "duration_sec": 4
+    },
+    {
+      "no": 8,
+      "title": "광주은행 표준 양식 작성",
+      "agent": "A7",
+      "inputs": ["광주은행 표준 양식", "A1-A6 통합", "근거 자료 인용"],
+      "output": "승인신청서 + 해설서 초안",
+      "duration_sec": 7
+    }
+  ]
+}

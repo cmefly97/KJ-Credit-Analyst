@@ -1,0 +1,93 @@
+{
+  "agents": [
+    {
+      "id": "A1",
+      "name": "Document Ingestor",
+      "kor": "자료 정규화",
+      "model": "reg01 v1 + HCX-005 VLM",
+      "icon": "📑",
+      "color": "#1565c0",
+      "stage": 1,
+      "duration_sec": 4,
+      "description": "PDF·HWP·이미지 → 구조화 MD/JSON. OCR/VLM으로 비정형 문서 정규화."
+    },
+    {
+      "id": "A2",
+      "name": "Financial Analyst",
+      "kor": "재무 분석",
+      "model": "HCX-007 Thinking",
+      "icon": "📊",
+      "color": "#0277bd",
+      "stage": 2,
+      "duration_sec": 5,
+      "description": "3개년 재무제표·부속명세서·세금계산서 → 추세·KPI·이상치."
+    },
+    {
+      "id": "A3",
+      "name": "Accounts Receivable",
+      "kor": "매출채권 검증",
+      "model": "HCX-SEED-32B",
+      "icon": "💰",
+      "color": "#0288d1",
+      "stage": 3,
+      "duration_sec": 4,
+      "description": "매출채권 명세·거래처원장·대손충당금 → 회수·집중도·회전기간."
+    },
+    {
+      "id": "A4",
+      "name": "Bank-Loan Aggregator",
+      "kor": "타행 여신 통합",
+      "model": "HCX-SEED-32B",
+      "icon": "🏦",
+      "color": "#039be5",
+      "stage": 4,
+      "duration_sec": 4,
+      "description": "타행거래확인서·운전자금·대출내역 → 통합 익스포저·상환 패턴."
+    },
+    {
+      "id": "A5",
+      "name": "Collateral",
+      "kor": "담보 평가",
+      "model": "HCX-007 + Vision",
+      "icon": "🏛",
+      "color": "#03a9f4",
+      "stage": 5,
+      "duration_sec": 4,
+      "description": "등기부·감정평가서 → 감정가·담보가·근저당 순위·LTV."
+    },
+    {
+      "id": "A6",
+      "name": "Compliance",
+      "kor": "동일차주 합산",
+      "model": "HCX-007 Thinking + Graph DB",
+      "icon": "⚠️",
+      "color": "#b71c1c",
+      "stage": 6,
+      "duration_sec": 6,
+      "description": "★ 관계회사 자동 식별 + 단기대여 추적 + 한도 위반 검출. KJ의 Killer Feature.",
+      "killer": true
+    },
+    {
+      "id": "A7",
+      "name": "Report Writer",
+      "kor": "보고서 작성",
+      "model": "HCX-007 Thinking + RAG",
+      "icon": "📝",
+      "color": "#0d47a1",
+      "stage": 8,
+      "duration_sec": 7,
+      "description": "광주은행 표준 양식 + A1-A6 통합 + 근거 자료 인용 → 승인신청서 + 해설서 초안."
+    }
+  ],
+  "synthesis": {
+    "id": "Synth",
+    "name": "Risk Synthesis",
+    "kor": "위험 종합",
+    "model": "HCX-007 Thinking",
+    "icon": "🔬",
+    "color": "#1976d2",
+    "stage": 7,
+    "duration_sec": 4,
+    "description": "정량·정성 위험요인 통합 + 가중치 산출 + 근거 자료 인용."
+  }
+}

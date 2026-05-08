@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<title>KJ Credit Analyst v2 — 광주은행 빛가람한전지점 (HST 케이스)</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style2.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ── HEADER ── -->
+  <header class="header">
+    <div class="brand">
+      <div class="title">KJ Credit Analyst <span style="font-size:11px; opacity:.7; font-weight:400; vertical-align:middle;">v2</span></div>
+      <div class="sub">
+        <span>광주은행 빛가람한전지점</span>
+        <span>차주: <b>(주)에이치에스티</b> · 사업자 678-86-00767 · 대표 황성태</span>
+        <span>비즈니스파트너론 <b>17.1억</b> / 36개월 / 5.83% / <b>BB+</b>  - (데모 시연용) </span>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="btn-print-app" class="btn-primary btn-print" type="button" disabled
+              title="Stage 8 완료 후 활성화">📋 승인신청서 출력</button>
+      <button id="btn-reset" class="btn-ghost" type="button" title="처음으로">↻ 초기화</button>
+      <button id="btn-start" class="btn-primary" type="button">▶ 심사 시작</button>
+    </div>
+  </header>
+
+  <!-- ── BODY ── -->
+  <main class="body">
+
+    <!-- LEFT — 자료 트리 + 참고자료 -->
+    <aside class="panel">
+      <div class="panel-head">
+        <span>📁 입력 자료 (모델 처리 대상)</span>
+        <span id="files-progress" style="font-weight:400;">0 / 0</span>
+      </div>
+      <div class="panel-body">
+        <div id="file-tree" class="file-tree"></div>
+
+        <!-- 참고자료 (분리) -->
+        <div class="ref-divider"></div>
+        <div class="ref-section">
+          <div class="ref-section-head">
+            📎 참고자료 <span style="font-weight:400; opacity:.85;">— 모델 입력 X · 학습/검증용 정답지</span>
+          </div>
+          <div id="ref-tree" class="ref-tree"></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CENTER — Pipeline -->
+    <section class="panel">
+      <div class="panel-head">
+        <span>⚙ 8-Stage 심사 파이프라인</span>
+        <span id="pipeline-status" style="font-weight:400; color:var(--muted);">대기 중 — 우상단 ▶ 심사 시작 클릭</span>
+      </div>
+      <div class="panel-body">
+        <div id="pipeline" class="pipeline"></div>
+
+        <!-- Final output banner -->
+        <div id="final-output" class="final-output hidden">
+          <div class="fo-icon">📋</div>
+          <div class="fo-text">
+            <div class="fo-title">최종 산출물 — (주)에이치에스티 승인신청서</div>
+            <div class="fo-sub">광주은행 표준 양식 자동 작성 완료 · 84% 일치율 · 출처 28건 인용 · 합산 검출 ✓</div>
+          </div>
+          <button id="btn-print-bottom" class="btn-print-large" type="button">📋 승인신청서 출력 →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT — Stage 상세 -->
+    <aside class="panel">
+      <div class="panel-head">
+        <span>🔍 Stage 상세</span>
+        <span id="detail-stage" style="font-weight:400; color:var(--muted);">—</span>
+      </div>
+      <div class="panel-body">
+        <div id="detail" class="detail">
+          <div class="detail-empty"><span>차주: <b>
+            ▶ 심사 시작 후<br>각 Stage 카드를 클릭하면<br>상세 결과·근거·플래그가 표시됩니다.</b></span>
+            <br><br>
+            <div style="text-align:left; font-size:11px; padding: 12px; background: var(--gray-1); border-radius: 6px; line-height: 1.5;">
+              
+              <b>시연 키 포인트</b><br>
+              · 광주은행 빛가람한전지점차주: (주)에이치에스티 여신심사 케이스 분석<br>
+              · AI 기반 입력 문서 자동 분류, 심사 파이프라인별 데이터 정규화 및 온톨로지 기반 저장<br>
+              · 8-Stage 자동 진행 (총 ~40초)<br>
+              · ★ Stage 6: 온톨로지 관계 분석을 통한 동일차주 합산 70.5억<br>
+              · Stage 8: 광주은행 표준 양식 자동 작성 → HTML 양식 모달<br>
+              · AI 심사 보조의견 작성 
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- ── FOOTER METRICS ── -->
+  <footer class="footer">
+    <div class="metric">
+      <span class="lbl">TTFT</span>
+      <span id="m-ttft" class="val">—</span>
+    </div>
+    <div class="metric">
+      <span class="lbl">표준 양식 일치율</span>
+      <span id="m-match" class="val">—</span>
+    </div>
+    <div class="metric">
+      <span class="lbl">★ 동일차주 검출</span>
+      <span id="m-related" class="val">—</span>
+    </div>
+    <div class="metric">
+      <span class="lbl">근거 인용</span>
+      <span id="m-evidence" class="val">—</span>
+    </div>
+    <div class="metric">
+      <span class="lbl">토큰 비용</span>
+      <span id="m-cost" class="val">—</span>
+    </div>
+    <div class="credit">
+      네이버클라우드 AX Lab · 2026 · v2<br>
+      <span style="opacity:.6;">시뮬레이션 데모 · 실제 LLM 호출 X</span>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ── MODAL — 승인신청서 출력 ── -->
+<div id="modal-overlay" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="modal-toolbar">
+      <div class="modal-title">📋 (주)에이치에스티 승인신청서 — KJ Credit Analyst 자동 작성 초안</div>
+      <div class="modal-actions">
+        <button id="btn-modal-print" class="btn-modal" type="button">🖨 인쇄</button>
+        <button id="btn-modal-close" class="btn-modal btn-modal-close" type="button">✕ 닫기</button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div id="approval-form" class="approval-form"></div>
+    </div>
+  </div>
+</div>
+
+<script src="data/data-bundle.js"></script>
+<script src="script2.js"></script>
+</body>
+</html>

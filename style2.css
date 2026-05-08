@@ -1,0 +1,559 @@
+/* KJ Credit Analyst v2 — 추가 스타일 (style.css 위에 덮어쓰기) */
+
+/* ── 좌측: 참고자료 섹션 분리 ── */
+.ref-divider {
+  height: 1px;
+  background: var(--gray-2);
+  margin: 16px 0 10px;
+  position: relative;
+}
+.ref-divider::before {
+  content: "✂";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--card);
+  padding: 0 8px;
+  color: var(--gray-3);
+  font-size: 12px;
+}
+.ref-section {
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 12px;
+}
+.ref-section-head {
+  font-weight: 700;
+  color: #e65100;
+  font-size: 11px;
+  margin-bottom: 6px;
+  padding: 4px 6px;
+  background: #ffecb3;
+  border-radius: 4px;
+}
+.ref-tree { display: flex; flex-direction: column; gap: 3px; }
+.ref-item {
+  padding: 5px 8px;
+  background: #ffffff;
+  border-radius: 4px;
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  border-left: 2px solid #ff9800;
+  line-height: 1.3;
+}
+.ref-item .fname {
+  flex: 1;
+  font-weight: 500;
+  color: #5d4037;
+  word-break: break-all;
+  font-size: 11px;
+}
+.ref-item .fnote {
+  display: block;
+  margin-top: 2px;
+  font-size: 9px;
+  color: #8d6e63;
+  font-style: italic;
+}
+.ref-item .fsize {
+  font-size: 10px;
+  color: var(--gray-3);
+  white-space: nowrap;
+}
+
+/* ── 헤더 출력 버튼 ── */
+.btn-print {
+  background: #ffeb3b;
+  color: #5d4037;
+}
+.btn-print:hover:not(:disabled) {
+  background: #ffd54f;
+}
+.btn-print:disabled {
+  background: rgba(255, 255, 255, .2) !important;
+  color: rgba(255, 255, 255, .55) !important;
+}
+.btn-print:not(:disabled) {
+  animation: print-pulse 1.6s ease-in-out infinite;
+}
+@keyframes print-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 235, 59, .6); }
+  50% { box-shadow: 0 0 0 8px rgba(255, 235, 59, 0); }
+}
+
+/* ── 최종 출력 배너 ── */
+.final-output {
+  margin-top: 16px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #fff8e1 0%, #ffe082 100%);
+  border: 2px solid #ff9800;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 16px;
+  align-items: center;
+  box-shadow: var(--shadow);
+  animation: final-glow 2s ease-in-out infinite;
+}
+@keyframes final-glow {
+  0%, 100% { box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3); }
+  50% { box-shadow: 0 4px 20px rgba(255, 152, 0, 0.55); }
+}
+.fo-icon {
+  font-size: 36px;
+  line-height: 1;
+}
+.fo-text { display: flex; flex-direction: column; gap: 4px; }
+.fo-title {
+  font-weight: 700;
+  font-size: 15px;
+  color: #5d4037;
+}
+.fo-sub {
+  font-size: 11px;
+  color: #6d4c41;
+}
+.btn-print-large {
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 3px 10px rgba(13, 71, 161, 0.4);
+  transition: transform .12s, box-shadow .12s;
+}
+.btn-print-large:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 16px rgba(13, 71, 161, 0.6);
+}
+
+/* ── MODAL ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 35, 70, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fade-in .25s ease-out;
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.modal {
+  background: #fff;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 920px;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  animation: modal-in .3s ease-out;
+}
+@keyframes modal-in {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.modal-toolbar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 12px 18px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+  color: #fff;
+  border-radius: 10px 10px 0 0;
+  gap: 12px;
+}
+.modal-title {
+  font-size: 14px;
+  font-weight: 700;
+}
+.modal-actions { display: flex; gap: 8px; }
+.btn-modal {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  padding: 6px 14px;
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btn-modal:hover { background: rgba(255, 255, 255, 0.3); }
+.btn-modal-close { border-color: rgba(255, 255, 255, 0.5); }
+.modal-body {
+  overflow-y: auto;
+  padding: 0;
+  background: #f5f7fa;
+  flex: 1;
+}
+
+/* ── 승인신청서 양식 (A4 인쇄) ── */
+.approval-form {
+  max-width: 780px;
+  margin: 24px auto;
+  background: #fff;
+  padding: 32px 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  font-family: -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", "Nanum Gothic", serif;
+  font-size: 12px;
+  line-height: 1.55;
+  color: #1a1a1a;
+}
+.af-header {
+  text-align: center;
+  border-bottom: 3px double #0d47a1;
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+}
+.af-bank {
+  font-size: 12px;
+  color: var(--blue);
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+.af-doctitle {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-top: 6px;
+  letter-spacing: 1px;
+}
+.af-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 8px;
+  padding: 0 4px;
+}
+.af-stamp {
+  display: inline-block;
+  padding: 4px 12px;
+  border: 2px solid var(--red);
+  border-radius: 4px;
+  color: var(--red);
+  font-weight: 700;
+  letter-spacing: 1px;
+  transform: rotate(-3deg);
+}
+
+.af-section {
+  margin: 18px 0;
+}
+.af-section-title {
+  background: #e8eef7;
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-left: 4px solid var(--navy);
+  margin-bottom: 8px;
+}
+.af-section-title.alert {
+  background: #ffebee;
+  color: var(--red);
+  border-left-color: var(--red);
+}
+.af-section-title.alert::before { content: "⚠ "; }
+
+.af-tbl {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 4px;
+}
+.af-tbl th, .af-tbl td {
+  border: 1px solid #c5cad4;
+  padding: 6px 10px;
+  text-align: left;
+  vertical-align: top;
+  font-size: 11px;
+}
+.af-tbl th {
+  background: #f0f3f8;
+  width: 30%;
+  font-weight: 600;
+  color: var(--navy);
+}
+.af-tbl td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.af-tbl tr.highlight th { background: #ffebee; color: var(--red); }
+.af-tbl tr.highlight td { background: #fff5f5; }
+
+.af-narrative {
+  background: #fafbfc;
+  padding: 10px 14px;
+  border-left: 3px solid var(--blue);
+  border-radius: 0 4px 4px 0;
+  font-size: 11px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+.af-narrative.alert {
+  border-left-color: var(--red);
+  background: #fff5f5;
+}
+.af-narrative b { color: var(--navy); }
+
+.af-source {
+  display: block;
+  margin-top: 6px;
+  font-size: 10px;
+  color: var(--muted);
+  font-style: italic;
+  text-align: right;
+}
+
+.af-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.af-grid > div {
+  background: #f7f9fc;
+  padding: 8px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+}
+.af-grid > div b {
+  display: block;
+  color: var(--navy);
+  font-size: 10px;
+  margin-bottom: 2px;
+}
+
+.af-conditions {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: cond;
+}
+.af-conditions li {
+  counter-increment: cond;
+  padding: 6px 10px 6px 32px;
+  background: #fff3e0;
+  border-radius: 4px;
+  margin-bottom: 4px;
+  position: relative;
+  font-size: 11px;
+}
+.af-conditions li::before {
+  content: counter(cond) ".";
+  position: absolute;
+  left: 10px;
+  font-weight: 700;
+  color: #e65100;
+}
+
+.af-decision {
+  margin: 24px 0 16px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  border: 2px solid #ff9800;
+  border-radius: 6px;
+  text-align: center;
+}
+.af-decision-label {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 4px;
+  letter-spacing: 1px;
+}
+.af-decision-value {
+  font-size: 18px;
+  font-weight: 800;
+  color: #e65100;
+  letter-spacing: 1px;
+}
+
+.af-signature {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--gray-2);
+}
+.af-sign-box {
+  border: 1px solid var(--gray-2);
+  text-align: center;
+  font-size: 10px;
+  background: #fafbfc;
+}
+.af-sign-box .lbl {
+  background: #f0f3f8;
+  padding: 4px;
+  font-weight: 600;
+  color: var(--navy);
+  border-bottom: 1px solid var(--gray-2);
+}
+.af-sign-box .body {
+  padding: 18px 4px 8px;
+  color: var(--gray-3);
+  font-size: 9px;
+}
+
+.af-footer {
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--gray-2);
+  font-size: 9px;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+}
+.af-footer .ai-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--light);
+  color: var(--blue);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+/* ── AI 보조 작성 섹션 (인터랙티브) ── */
+.af-ai-section {
+  margin: 22px 0 14px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #f3e5f5 0%, #ede7f6 100%);
+  border: 1px solid #b39ddb;
+  border-radius: 6px;
+}
+.af-ai-header {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.ai-toggle-btn {
+  background: #6a1b9a;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background .15s;
+}
+.ai-toggle-btn:hover { background: #4a148c; }
+.ai-toggle-btn.expanded { background: #8e24aa; }
+.ai-toggle-btn::after { content: " ▶"; font-size: 9px; }
+.ai-toggle-btn.expanded::after { content: " ▼"; }
+
+.ai-edit-btn,
+.ai-save-btn,
+.ai-cancel-btn,
+.ai-revert-btn {
+  border: none;
+  padding: 7px 13px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background .15s, transform .12s;
+}
+.ai-edit-btn:hover,
+.ai-save-btn:hover,
+.ai-cancel-btn:hover,
+.ai-revert-btn:hover { transform: translateY(-1px); }
+
+.ai-edit-btn { background: #1976d2; color: #fff; }
+.ai-edit-btn:hover { background: #1565c0; }
+
+.ai-save-btn { background: #2e7d32; color: #fff; }
+.ai-save-btn:hover { background: #1b5e20; }
+
+.ai-cancel-btn { background: #fff; color: #555; border: 1px solid #ccc; }
+.ai-cancel-btn:hover { background: #eee; }
+
+.ai-revert-btn { background: #fff8e1; color: #e65100; border: 1px solid #ffb74d; }
+.ai-revert-btn:hover { background: #ffe0b2; }
+
+.ai-edit-status {
+  margin-left: auto;
+  font-size: 10px;
+  color: #6a1b9a;
+  font-style: italic;
+  font-weight: 500;
+}
+.ai-edit-status.modified { color: #f57c00; font-weight: 700; font-style: normal; }
+.ai-edit-status.modified::before { content: "✎ "; }
+.ai-edit-status.editing { color: #1565c0; font-weight: 700; font-style: normal; }
+.ai-edit-status.editing::before { content: "● "; color: #1565c0; }
+
+.af-ai-body {
+  margin-top: 12px;
+  animation: fade-ai .25s ease-out;
+}
+@keyframes fade-ai {
+  from { opacity: 0; max-height: 0; }
+  to { opacity: 1; max-height: 1000px; }
+}
+
+.ai-opinion {
+  background: #fff;
+  border: 1px solid #ce93d8;
+  border-radius: 5px;
+  padding: 14px 18px;
+  font-size: 12px;
+  line-height: 1.75;
+  white-space: pre-wrap;
+  word-break: keep-all;
+  min-height: 80px;
+  outline: none;
+  font-family: -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  color: #2c1a3e;
+  transition: border-color .15s, box-shadow .15s, background .15s;
+}
+.ai-opinion.editing,
+.ai-opinion[contenteditable="true"] {
+  border-color: #1976d2;
+  border-width: 2px;
+  background: #f3f9ff;
+  box-shadow: 0 0 0 4px rgba(25, 118, 210, 0.15);
+  padding: 13px 17px;
+  cursor: text;
+}
+.ai-opinion[contenteditable="true"]:focus { outline: none; }
+
+/* 인쇄용 */
+@media print {
+  body * { visibility: hidden; }
+  .modal-overlay, .modal-overlay * { visibility: visible; }
+  .modal-overlay {
+    position: absolute; inset: 0; background: #fff; padding: 0;
+  }
+  .modal {
+    box-shadow: none; max-height: none; max-width: none;
+  }
+  .modal-toolbar { display: none; }
+  .modal-body { background: #fff; padding: 0; overflow: visible; }
+  .approval-form { box-shadow: none; margin: 0; padding: 20mm; max-width: 210mm; }
+  .af-stamp { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  /* AI 섹션은 인쇄 시 항상 펼친 상태 + 액션 버튼 숨김 */
+  .af-ai-body { display: block !important; max-height: none !important; opacity: 1 !important; }
+  .ai-edit-btn, .ai-save-btn, .ai-cancel-btn, .ai-revert-btn { display: none !important; }
+  .ai-toggle-btn::after { display: none !important; }
+  .ai-toggle-btn { background: #6a1b9a !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .ai-opinion { border: 1px solid #999 !important; box-shadow: none !important; background: #fafafa !important; }
+}
+
+.hidden { display: none !important; }
